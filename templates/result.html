@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>발음 평가 결과</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <h1>🎧 발음 및 억양 분석 결과</h1>
+
+  <h2>📌 Azure 발음 평가</h2>
+  <ul>
+    <li><strong>정확도 (accuracy):</strong> {{ azure.accuracy }}</li>
+    <li><strong>유창성 (fluency):</strong> {{ azure.fluency }}</li>
+    <li><strong>완전성 (completeness):</strong> {{ azure.completeness }}</li>
+    <li><strong>종합 발음 점수:</strong> {{ azure.pronunciation }}</li>
+    <li><strong>인식된 문장:</strong> "{{ azure.text }}"</li>
+  </ul>
+
+  <h3>🟥 문제가 감지된 문장 하이라이트</h3>
+  {% if highlighted_text %}
+  <div class="highlight-box">
+    {{ highlighted_text | safe }}
+  </div>
+  {% else %}
+  <p class="phoneme-ok">➖ 모든 단어가 정확히 발음되었습니다.</p>
+  {% endif %}
+
+  <h2>📌 준서 모델 억양 분석</h2>
+  <ul>
+    <li><strong>L1 유사도 점수:</strong> {{ junseo.similarity_score }}</li>
+    <li><strong>피드백:</strong> {{ junseo.intonation_feedback }}</li>
+  </ul>
+
+  <h3>🔍 정확도 낮은 음소 목록</h3>
+  {% if azure.problematic_phonemes %}
+    <p style="font-size: 0.95rem; color: #aaa;">※ 70점 미만은 개선이 필요합니다.</p>
+    <div class="phoneme-list">
+      <ul>
+        {% for p in azure.problematic_phonemes %}
+          <li>
+            {% if p.score < 50 %}
+              <span style="color:#e74c3c; font-weight:bold;">{{ p.phoneme }}</span>: {{ p.score }}점
+            {% elif p.score < 70 %}
+              <span style="color:#f39c12; font-weight:bold;">{{ p.phoneme }}</span>: {{ p.score }}점
+            {% else %}
+              <span style="color:#2ecc71;">{{ p.phoneme }}</span>: {{ p.score }}점
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% else %}
+    <p class="phoneme-ok">모든 음소의 발음이 양호합니다! 👏</p>
+  {% endif %}
+
+  <h3>📊 L1-L2 억양 곡선 시각화</h3>
+  <img src="{{ intonation_plot }}" alt="억양 그래프" class="intonation-plot">
+  <p class="plot-caption">🔵 원어민 평균 곡선 vs 🔴 L2 화자 억양 곡선</p>
+
+  <a href="/">🔙 다시 분석하기</a>
+</body>
+</html>

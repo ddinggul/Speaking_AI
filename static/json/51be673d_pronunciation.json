@@ -1,0 +1,53 @@
+{
+  "accuracy": 88.0,
+  "fluency": 80.0,
+  "completeness": 100.0,
+  "pronunciation": 85.6,
+  "text": "You're a devil for fighting and will for surely win.",
+  "problematic_phonemes": [
+    {
+      "phoneme": "y",
+      "score": 57.0
+    },
+    {
+      "phoneme": "v",
+      "score": 66.0
+    },
+    {
+      "phoneme": "ax",
+      "score": 20.0
+    },
+    {
+      "phoneme": "l",
+      "score": 45.0
+    },
+    {
+      "phoneme": "r",
+      "score": 60.0
+    },
+    {
+      "phoneme": "f",
+      "score": 41.0
+    },
+    {
+      "phoneme": "ax",
+      "score": 39.0
+    },
+    {
+      "phoneme": "r",
+      "score": 52.0
+    },
+    {
+      "phoneme": "uh",
+      "score": 57.0
+    },
+    {
+      "phoneme": "r",
+      "score": 60.0
+    },
+    {
+      "phoneme": "n",
+      "score": 66.0
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <title>Azure 발음 평가</title>
+</head>
+<body>
+  <h1>🎙️ L2 발화 억양/발음 평가기</h1>
+
+  <form action="/analyze/" method="post" enctype="multipart/form-data">
+  <label for="file">🗂️ 음성 파일 (.wav)</label><br>
+  <input type="file" name="file" required><br><br>
+
+  <label for="reference">📄 기준 문장 (L1 Reference)</label><br>
+  <select name="reference" id="reference" required>
+    <option value="1">He was pressing beyond the limits of his vocabulary.</option>
+    <option value="2">But he reconciled himself to it by an act of faith.</option>
+    <option value="3">Each insult added to the value of the claim.</option>
+    <option value="4">There is more behind this than a mere university ideal.</option>
+    <option value="5">You're a devil for fighting, and will surely win.</option>
+  </select>
+
+  <input type="hidden" name="mel_path" id="mel_path_input"><br><br>
+  <button type="submit">🚀 분석 시작</button>
+</form>
+
+<script>
+  const melMap = {
+    "1": "spectrogram/L1/1_L1_mels.npy",
+    "2": "spectrogram/L1/2_L1_mels.npy",
+    "3": "spectrogram/L1/3_L1_mels.npy",
+    "4": "spectrogram/L1/4_L1_mels.npy",
+    "5": "spectrogram/L1/5_L1_mels.npy"
+  };
+
+  const select = document.getElementById("reference");
+  const melInput = document.getElementById("mel_path_input");
+
+  select.addEventListener("change", () => {
+    melInput.value = melMap[select.value];
+  });
+
+  // 초기 설정
+  window.addEventListener("DOMContentLoaded", () => {
+    melInput.value = melMap[select.value];
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# .gitignore 예시
+uploads/
+*.wav
+*.mp3
+*.npy
+*.pth
+config.py
+.env

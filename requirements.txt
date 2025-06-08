@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sounddevice
+soundfile
+numpy
+librosa
+torch
+opencv-python
+scipy
+python-multipart
+azure-cognitiveservices-speech
+jinja2
+matplotlib
