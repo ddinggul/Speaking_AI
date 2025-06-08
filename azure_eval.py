@@ -1,9 +1,9 @@
 import azure.cognitiveservices.speech as speechsdk
 import json
-from config import AZURE_SPEECH_KEY, AZURE_REGION
+from config import AZURE_KEY, REGION
 
 def assess_pronunciation(wav_path: str, reference_text: str):
-    speech_config = speechsdk.SpeechConfig(subscription=AZURE_SPEECH_KEY, region=AZURE_REGION)
+    speech_config = speechsdk.SpeechConfig(subscription=AZURE_KEY, region=REGION)
     audio_config = speechsdk.audio.AudioConfig(filename=wav_path)
 
     pronunciation_config = speechsdk.PronunciationAssessmentConfig(
