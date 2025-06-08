@@ -8,7 +8,7 @@
 <body>
   <h1>🎧 발음 및 억양 분석 결과</h1>
 
-  <h2>📌 Azure 발음 평가</h2>
+  <h2>📌 AI 발음 평가</h2>
   <ul>
     <li><strong>정확도 (accuracy):</strong> {{ azure.accuracy }}</li>
     <li><strong>유창성 (fluency):</strong> {{ azure.fluency }}</li>
@@ -57,6 +57,10 @@
   <h3>📊 L1-L2 억양 곡선 시각화</h3>
   <img src="{{ intonation_plot }}" alt="억양 그래프" class="intonation-plot">
   <p class="plot-caption">🔵 원어민 평균 곡선 vs 🔴 L2 화자 억양 곡선</p>
+
+  <br>
+  <a href="{{ pdf_path }}" class="download-btn" target="_blank">📄 PDF 리포트 다운로드</a>
+  <br><br>
 
   <a href="/">🔙 다시 분석하기</a>
 </body>
