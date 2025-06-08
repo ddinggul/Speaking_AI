@@ -8,43 +8,95 @@
 <body>
   <h1>🎙️ L2 발화 억양/발음 평가기</h1>
 
-  <form action="/analyze/" method="post" enctype="multipart/form-data">
-  <label for="file">🗂️ 음성 파일 (.wav)</label><br>
-  <input type="file" name="file" required><br><br>
+  <!-- 기존 파일 업로드 폼 -->
+  <form id="analyzeForm" action="/analyze/" method="post" enctype="multipart/form-data">
+    <label for="file">🗂️ 음성 파일 (.wav, .m4a, .webm)</label><br>
+    <input type="file" id="fileInput" name="file" accept=".wav,.m4a,.webm" required><br><br>
 
-  <label for="reference">📄 기준 문장 (L1 Reference)</label><br>
-  <select name="reference" id="reference" required>
-    <option value="1">He was pressing beyond the limits of his vocabulary.</option>
-    <option value="2">But he reconciled himself to it by an act of faith.</option>
-    <option value="3">Each insult added to the value of the claim.</option>
-    <option value="4">There is more behind this than a mere university ideal.</option>
-    <option value="5">You're a devil for fighting, and will surely win.</option>
-  </select>
+    <label for="reference">📄 기준 문장 (L1 Reference)</label><br>
+    <select name="reference" id="reference" required>
+      <option value="1">He was pressing beyond the limits of his vocabulary.</option>
+      <option value="2">But he reconciled himself to it by an act of faith.</option>
+      <option value="3">Each insult added to the value of the claim.</option>
+      <option value="4">There is more behind this than a mere university ideal.</option>
+      <option value="5">You're a devil for fighting, and will surely win.</option>
+    </select>
 
-  <input type="hidden" name="mel_path" id="mel_path_input"><br><br>
-  <button type="submit">🚀 분석 시작</button>
-</form>
+    <input type="hidden" name="mel_path" id="mel_path_input"><br><br>
 
-<script>
-  const melMap = {
-    "1": "spectrogram/L1/1_L1_mels.npy",
-    "2": "spectrogram/L1/2_L1_mels.npy",
-    "3": "spectrogram/L1/3_L1_mels.npy",
-    "4": "spectrogram/L1/4_L1_mels.npy",
-    "5": "spectrogram/L1/5_L1_mels.npy"
-  };
+    <button type="submit">🚀 분석 시작</button>
+  </form>
 
-  const select = document.getElementById("reference");
-  const melInput = document.getElementById("mel_path_input");
+  <hr>
 
-  select.addEventListener("change", () => {
-    melInput.value = melMap[select.value];
-  });
+  <!-- 웹 녹음 기능 추가 -->
+  <h2>🎤 웹에서 직접 녹음해서 분석하기</h2>
+  <button id="recordBtn">🔴 녹음 시작</button>
+  <button id="stopBtn" disabled>⏹️ 녹음 정지</button>
+  <br><br>
+  <audio id="audioPlayer" controls></audio>
 
-  // 초기 설정
-  window.addEventListener("DOMContentLoaded", () => {
-    melInput.value = melMap[select.value];
-  });
-</script>
+  <script>
+    const melMap = {
+      "1": "spectrogram/L1/1_L1_mels.npy",
+      "2": "spectrogram/L1/2_L1_mels.npy",
+      "3": "spectrogram/L1/3_L1_mels.npy",
+      "4": "spectrogram/L1/4_L1_mels.npy",
+      "5": "spectrogram/L1/5_L1_mels.npy"
+    };
+
+    const select = document.getElementById("reference");
+    const melInput = document.getElementById("mel_path_input");
+
+    select.addEventListener("change", () => {
+      melInput.value = melMap[select.value];
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      melInput.value = melMap[select.value];
+    });
+
+    // 녹음 기능
+    let mediaRecorder;
+    let audioChunks = [];
+
+    const recordBtn = document.getElementById('recordBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const fileInput = document.getElementById('fileInput');
+
+    recordBtn.addEventListener('click', async () => {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+
+      mediaRecorder.ondataavailable = event => {
+        audioChunks.push(event.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        audioPlayer.src = audioUrl;
+
+        const file = new File([audioBlob], 'recording.webm', { type: 'audio/webm' });
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        fileInput.files = dataTransfer.files;
+
+        alert("✅ 녹음이 완료되어 자동으로 업로드 대상이 되었습니다!");
+      };
+
+      mediaRecorder.start();
+      recordBtn.disabled = true;
+      stopBtn.disabled = false;
+    });
+
+    stopBtn.addEventListener('click', () => {
+      mediaRecorder.stop();
+      recordBtn.disabled = false;
+      stopBtn.disabled = true;
+    });
+  </script>
 </body>
 </html>
