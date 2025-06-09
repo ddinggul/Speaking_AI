@@ -59,6 +59,10 @@
   <p class="plot-caption">🔵 원어민 평균 곡선 vs 🔴 L2 화자 억양 곡선</p>
 
   <br>
+  {% if audio_path %}
+    <a href="{{ audio_path }}" class="download-btn" download>🎧 내 음성 다운로드</a><br><br>
+  {% endif %}
+
   <a href="{{ pdf_path }}" class="download-btn" target="_blank">📄 PDF 리포트 다운로드</a>
   <br><br>
 

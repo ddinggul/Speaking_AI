@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @font-face {
+      font-family: 'NanumGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2301@1.1/NanumGothic.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      font-family: 'NanumGothic', sans-serif;
+      padding: 50px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    img {
+      width: 80%;
+      margin-top: 30px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>📄 발음 평가 결과</h1>
+<p><strong>화자:</strong> {{ speaker }}</p>
+<p><strong>분석 모드:</strong> {{ mode }}</p>
+<p><strong>점수:</strong> {{ score }}</p>
+<p><strong>피드백:</strong> {{ feedback }}</p>
+<img src="{{ plot_path }}" alt="억양 시각화">
+
+</body>
+</html>

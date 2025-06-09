@@ -10,6 +10,15 @@
 
   <!-- 기존 파일 업로드 폼 -->
   <form id="analyzeForm" action="/analyze/" method="post" enctype="multipart/form-data">
+    <label for="speaker">🙋‍♂️ 화자 이름</label><br>
+    <input type="text" id="speaker" name="speaker_name" placeholder="예: Junseo" required><br><br>
+
+    <label for="mode">🛠️ 모드 선택</label><br>
+    <select id="mode" name="mode" required>
+      <option value="before">교정 전</option>
+      <option value="after">교정 후</option>
+    </select><br><br>
+
     <label for="file">🗂️ 음성 파일 (.wav, .m4a, .webm)</label><br>
     <input type="file" id="fileInput" name="file" accept=".wav,.m4a,.webm" required><br><br>
 
@@ -35,6 +44,8 @@
   <button id="stopBtn" disabled>⏹️ 녹음 정지</button>
   <br><br>
   <audio id="audioPlayer" controls></audio>
+  <br>
+  <a id="downloadLink" style="display:none;" download="recording.webm">📥 녹음 파일 다운로드</a>
 
   <script>
     const melMap = {
@@ -64,6 +75,7 @@
     const stopBtn = document.getElementById('stopBtn');
     const audioPlayer = document.getElementById('audioPlayer');
     const fileInput = document.getElementById('fileInput');
+    const downloadLink = document.getElementById('downloadLink');
 
     recordBtn.addEventListener('click', async () => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -79,10 +91,15 @@
         const audioUrl = URL.createObjectURL(audioBlob);
         audioPlayer.src = audioUrl;
 
+        // 자동 파일 업로드 설정
         const file = new File([audioBlob], 'recording.webm', { type: 'audio/webm' });
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
         fileInput.files = dataTransfer.files;
+
+        // 다운로드 링크 설정
+        downloadLink.href = audioUrl;
+        downloadLink.style.display = "inline";
 
         alert("✅ 녹음이 완료되어 자동으로 업로드 대상이 되었습니다!");
       };
