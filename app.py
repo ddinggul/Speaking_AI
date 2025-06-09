@@ -87,6 +87,7 @@ async def analyze(
     pdf_path = os.path.join(PDF_DIR, pdf_filename)
 
     env = Environment(loader=FileSystemLoader("templates"))
+    env.cache = {}  # ✅ Jinja2 템플릿 캐시 비우기
     template = env.get_template("result_for_pdf.html")
     rendered_html = template.render(
         score=f"{similarity_score:.2f}",

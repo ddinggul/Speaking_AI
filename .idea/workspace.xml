@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e7a10c3-eb8d-43f2-825c-a4c5bfee2856" name="변경" comment="PDF 다운로드 추가">
-      <change afterPath="$PROJECT_DIR$/templates/result_for_pdf.html" afterDir="false" />
+    <list default="true" id="7e7a10c3-eb8d-43f2-825c-a4c5bfee2856" name="변경" comment="화자 및 교정 전 후 선택란 추가 &amp; 음원 다운로드 버튼 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +90,7 @@
       <workItem from="1749352265460" duration="13258000" />
       <workItem from="1749367744264" duration="6660000" />
       <workItem from="1749432292522" duration="602000" />
-      <workItem from="1749475340119" duration="330000" />
+      <workItem from="1749475340119" duration="1032000" />
     </task>
     <task id="LOCAL-00001" summary="음성 분석 프로젝트 1차">
       <option name="closed" value="true" />
@@ -136,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749397843842</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="화자 및 교정 전 후 선택란 추가 &amp; 음원 다운로드 버튼 추가">
+      <option name="closed" value="true" />
+      <created>1749475742842</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1749475742842</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +152,8 @@
     <MESSAGE value="웹 배포용 수저" />
     <MESSAGE value="AWS 서버 작업용 수정" />
     <MESSAGE value="PDF 다운로드 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="PDF 다운로드 추가" />
+    <MESSAGE value="화자 및 교정 전 후 선택란 추가 &amp; 음원 다운로드 버튼 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="화자 및 교정 전 후 선택란 추가 &amp; 음원 다운로드 버튼 추가" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/EPCAI$config.coverage" NAME="config 커버리지 결과" MODIFIED="1749360965967" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
